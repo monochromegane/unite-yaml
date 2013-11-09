@@ -1,3 +1,7 @@
+function! unite#sources#yaml#define()
+  return s:source
+endfunction
+
 let s:source = {
   \ 'name' : 'yaml',
   \ 'description': 'candidates from yaml',
@@ -40,6 +44,4 @@ function! s:source.gather_candidates(args, context)
   endfor
   return candidates
 endfunction
-
-unlet s:source
 
