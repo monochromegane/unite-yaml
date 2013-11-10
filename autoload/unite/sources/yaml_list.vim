@@ -17,7 +17,7 @@ let s:action = {
   \ }
 
 function! s:action.func(candidate)
-  execute 'Unite' 'yaml:' . a:candidate.action__path
+  execute 'Unite' 'yaml:' . a:candidate.action__path. ' -buffer-name=yaml-buffer'
 endfunction
 
 call unite#custom#action('file', 'unite_yaml', s:action)
