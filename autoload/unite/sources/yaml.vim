@@ -12,6 +12,11 @@ let s:source = {
 call unite#define_source(s:source)
 
 function! s:source.hooks.on_init(args, context)
+  if !filereadable(a:args[0])
+    echo 'File dose not exists. [' . a:args[0] . ']'
+    let a:context.source__lines = []
+    return
+  endif
 ruby << EOC
   require 'yaml'
   hash = YAML.load_file(VIM.evaluate('a:args').first)
