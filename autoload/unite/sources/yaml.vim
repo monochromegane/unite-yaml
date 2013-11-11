@@ -28,7 +28,9 @@ function! s:source.hooks.on_init(args, context)
   endif
 ruby << EOC
   require 'yaml'
-  hash = YAML.load_file(VIM.evaluate('a:args').first)
+  require 'erb'
+  erb = ERB.new(File.read(VIM.evaluate('a:args').first))
+  hash = YAML.load(erb.result)
   def yaml_path(parent_path, yaml_value)
     parent_path.gsub!(/$/, "\.") unless parent_path.empty?
     if yaml_value.is_a?(Hash)
