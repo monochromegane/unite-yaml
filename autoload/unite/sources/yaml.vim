@@ -2,6 +2,10 @@ function! unite#sources#yaml#define()
   return s:source
 endfunction
 
+if !exists('g:unite_yaml_prefix')
+  let g:unite_yaml_prefix = ""
+endif
+
 let s:source = {
   \ 'name' : 'yaml',
   \ 'description': 'candidates from yaml',
@@ -47,7 +51,7 @@ function! s:source.gather_candidates(args, context)
   let candidates = []
   for line in a:context.source__lines
     call add(candidates, {
-          \ 'word': substitute(line, "\:.*", "", "g"),
+          \ 'word': g:unite_yaml_prefix . substitute(line, "\:.*", "", "g"),
           \ 'abbr': line,
           \ 'kind': 'word',
           \ })
