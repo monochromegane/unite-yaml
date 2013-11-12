@@ -45,7 +45,7 @@ ruby << EOC
       "#{parent_path.chop}: #{yaml_value}"
     end
   end
-  VIM.command("let a:context.source__lines = ['#{yaml_path('', hash).join("','")}']")
+  VIM.command("let a:context.source__lines = ['#{yaml_path('', hash).each{|v|v.gsub!(/'/, "''")}.join("','")}']")
 EOC
 endfunction
 
