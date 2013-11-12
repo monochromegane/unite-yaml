@@ -38,8 +38,8 @@ ruby << EOC
         yaml_path("#{parent_path}#{key}", value)
       end.flatten
     elsif yaml_value.is_a?(Array)
-      yaml_value.map.with_index do |value, index|
-        yaml_path("#{parent_path}#{index}", value)
+      yaml_value.map do |value|
+        yaml_path("#{parent_path}#{yaml_value.index(value)}", value)
       end.flatten
     else
       "#{parent_path.chop}: #{yaml_value}"
